@@ -9,9 +9,7 @@ import 'package:clientapp/cores/shared/size_boxes.dart';
 import 'package:clientapp/cores/shared/style.dart';
 import 'package:clientapp/router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,7 +34,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
         decoration: BoxDecoration(
           color: black,
           image: bg == ''
-              ? DecorationImage(
+              ? const DecorationImage(
                   image: AssetImage('assets/images/bg.png'),
                   fit: BoxFit.cover,
                   opacity: .8,
@@ -175,20 +173,6 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
                 const SizedBoxH20(),
-                Center(
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Text(
-                      "Available Barbers",
-                      style: textStyle14,
-                    ),
-                  ),
-                ),
-                const SizedBoxH20(),
                 StreamBuilder<QuerySnapshot>(
                   stream: DatabaseService().getAvailableBarbersStream(),
                   builder: (context, snapshot) {
@@ -202,61 +186,88 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     }
                     return snapshot.data!.docs.isEmpty
                         ? const Center(
-                            child: Text('No barber available'),
+                            child: Text(
+                              'No barber available',
+                              style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
                           )
-                        : Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.start,
-                            spacing: 20,
-                            runSpacing: 20,
-                            alignment: WrapAlignment.start,
-                            children: List.generate(
-                              snapshot.data!.docs.length,
-                              (index) {
-                                var data = snapshot.data!.docs[index];
-                                return Container(
-                                  padding: EdgeInsets.all(4),
+                        : Column(
+                            children: [
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     color: white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                      color: altoGrey,
-                                    ),
+                                    borderRadius: BorderRadius.circular(25),
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      ClipOval(
-                                        // borderRadius: BorderRadius.circular(15),
-                                        child: Image.network(
-                                          data['photo_url'],
-                                          width: 50,
-                                          height: 60,
-                                          fit: BoxFit.cover,
+                                  child: Text(
+                                    "Available Barbers",
+                                    style: textStyle14,
+                                  ),
+                                ),
+                              ),
+                              const SizedBoxH20(),
+                              Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                spacing: 20,
+                                runSpacing: 20,
+                                alignment: WrapAlignment.start,
+                                children: List.generate(
+                                  snapshot.data!.docs.length,
+                                  (index) {
+                                    var data = snapshot.data!.docs[index];
+                                    return Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                          color: altoGrey,
                                         ),
                                       ),
-                                      const SizedBoxW15(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(
-                                            data['name'],
-                                            style: textStyle16,
+                                          ClipOval(
+                                            // borderRadius: BorderRadius.circular(15),
+                                            child: Image.network(
+                                              data['photo_url'],
+                                              width: 50,
+                                              height: 60,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                          const SizedBoxH5(),
-                                          Text(
-                                            'Available Now',
-                                            style: textStyle12.copyWith(
-                                                color: green),
+                                          const SizedBoxW15(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data['name'],
+                                                style: textStyle16,
+                                              ),
+                                              const SizedBoxH5(),
+                                              Text(
+                                                'Available Now',
+                                                style: textStyle12.copyWith(
+                                                    color: green),
+                                              ),
+                                            ],
                                           ),
+                                          const SizedBoxW10(),
                                         ],
                                       ),
-                                      const SizedBoxW10(),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           );
                   },
                 ),
