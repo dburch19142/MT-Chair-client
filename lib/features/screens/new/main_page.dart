@@ -24,8 +24,8 @@ class MainPageScreen extends StatefulWidget {
 }
 
 class _MainPageScreenState extends State<MainPageScreen> {
-  String logo = Hive.box('empty').get('logo', defaultValue: '');
-  String bg = Hive.box('empty').get('bg', defaultValue: '');
+  String logo = Hive.box('mtclient').get('logo', defaultValue: '');
+  String bg = Hive.box('mtclient').get('bg', defaultValue: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

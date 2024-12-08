@@ -17,8 +17,8 @@ class ServiceScreen extends StatefulWidget {
 class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
-    String logo = Hive.box('empty').get('logo', defaultValue: '');
-    // String bg = Hive.box('empty').get('bg', defaultValue: '');
+    String logo = Hive.box('mtclient').get('logo', defaultValue: '');
+    // String bg = Hive.box('mtclient').get('bg', defaultValue: '');
     return Scaffold(
       body: Container(
         width: width(context),

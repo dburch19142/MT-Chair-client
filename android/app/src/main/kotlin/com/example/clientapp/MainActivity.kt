@@ -1,4 +1,4 @@
-package com.emptychair.client
+package com.mt.client
 
 import io.flutter.embedding.android.FlutterActivity
 

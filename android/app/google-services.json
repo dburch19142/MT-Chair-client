@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:311021410716:android:767fcbe3978cad8210d059",
         "android_client_info": {
-          "package_name": "com.emptychair.client"
+          "package_name": "com.mt.client"
         }
       },
       "oauth_client": [
