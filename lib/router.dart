@@ -1,6 +1,7 @@
 import 'package:clientapp/features/screens/new/home.dart';
 import 'package:clientapp/features/screens/new/hours.dart';
 import 'package:clientapp/features/screens/new/main_page.dart';
+import 'package:clientapp/features/screens/new/queue.dart';
 import 'package:clientapp/features/screens/new/services.dart';
 import 'package:clientapp/features/screens/new/splash.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class AppPages {
   static String mainPage = '/main_page';
   static String services = '/services';
   static String hours = '/hours';
+  static String queue = '/queue';
 }
 
 final appRouter = [
@@ -33,5 +35,9 @@ final appRouter = [
   GetPage(
     name: AppPages.hours,
     page: () => const HoursScreen(),
+  ),
+    GetPage(
+    name: AppPages.queue,
+    page: () => const WaitingListScreen(),
   ),
 ];

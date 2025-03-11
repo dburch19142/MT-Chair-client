@@ -300,6 +300,15 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       textColor: white,
                       bgColor: blue,
                     ),
+                    const SizedBoxH10(),
+                    CustomButton(
+                      onPressed: () {
+                        Get.toNamed(AppPages.queue);
+                      },
+                      text: 'Queue',
+                      textColor: white,
+                      bgColor: blue,
+                    ),
                   ],
                 )
               ],
